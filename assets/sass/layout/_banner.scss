@@ -1,177 +1,176 @@
 ///
-/// Forty by HTML5 UP
-/// html5up.net | @ajlkn
-/// Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+/// Prototype by Pixelarity
+/// pixelarity.com | hello@pixelarity.com
+/// License: pixelarity.com/license
 ///
 
 /* Banner */
 
 	#banner {
-		@include vendor('align-items', 'center');
-		@include vendor('background-image', 'url("../../images/banner.jpg")');
+		$overlay: transparentize(_palette(accent2, bg), 0.8);
+
+		@include color-typography(accent2);
+		@include color-button(accent2);
+		@include padding(6em, 0, (4.5em, 0, 0, 0));
 		@include vendor('display', 'flex');
-		@include padding(4em, 0, (2em, 0, 0, 0));
+		@include vendor('align-items', 'center');
+		@include vendor('justify-content', 'center');
+		@include vendor('background-image', (
+			'linear-gradient(to top, #{$overlay}, #{$overlay})',
+			'url("../../images/banner.jpg")',
+		));
 		background-attachment: fixed;
 		background-position: center;
-		background-repeat: no-repeat;
 		background-size: cover;
-		border-bottom: 0 !important;
-		cursor: default;
-		height: 60vh;
-		margin-bottom: -3.25em;
-		max-height: 32em;
-		min-height: 22em;
+		height: 75vh;
+		min-height: 30em;
 		position: relative;
-		top: -3.25em;
 
 		&:after {
-			@include vendor('transition', 'opacity #{_duration(banner)} ease');
-			@include vendor('transition-delay', '0.75s');
 			@include vendor('pointer-events', 'none');
-			background-color: _palette(bg);
+			@include vendor('transition', (
+				'opacity 2s ease',
+				'visibility 2s'
+			));
+			background-color: _palette(accent2, bg);
 			content: '';
-			display: block;
 			height: 100%;
 			left: 0;
-			opacity: 0.85;
+			opacity: 0;
 			position: absolute;
 			top: 0;
+			visibility: hidden;
 			width: 100%;
-			z-index: 1;
+			z-index: _misc(z-index-base) + 1;
 		}
 
-		h1 {
-			font-size: 3.25em;
-		}
+		.inner {
+			@include vendor('display', 'flex');
+			@include vendor('align-items', 'center');
+			max-width: _size(inner);
 
-		> .inner {
-			@include vendor('transition', (
-				'opacity 1.5s ease',
-				'transform 0.5s ease-out',
-				'filter 0.5s ease',
-				'-webkit-filter 0.5s ease'
-			));
-			padding: 0 !important;
-			position: relative;
-			z-index: 2;
-
-			.image {
-				display: none;
+			h2 {
+				font-size: 2.75em;
+				margin-bottom: 0;
+				margin-top: -0.25em;
+				line-height: 1.3;
 			}
 
-			header {
-				width: auto;
-
-				> :first-child {
-					width: auto;
-
-					&:after {
-						max-width: 100%;
-					}
-				}
+			p {
+				font-size: 1.2em;
+				margin: (_size(element-margin) * 0.35) 0 0 0;
 			}
 
 			.content {
-				@include vendor('display', 'flex');
-				@include vendor('align-items', 'center');
-				margin: 0 0 _size(element-margin) 0;
-
-				> * {
-					margin-right: 1.5em;
-					margin-bottom: 0;
-				}
+				@include vendor('transition', (
+					'transform 1s ease-out',
+					'opacity 1s ease-out'
+				));
+				@include vendor('transform', 'translateY(0)');
+				opacity: 1;
 
 				> :last-child {
-					margin-right: 0;
-				}
-
-				p {
-					font-size: 0.7em;
-					font-weight: _font(weight-bold);
-					letter-spacing: _font(letter-spacing-alt);
-					text-transform: uppercase;
+					margin-bottom: 0;
 				}
 			}
-		}
 
-		&.major {
-			height: 75vh;
-			min-height: 30em;
-			max-height: 50em;
+			.actions {
+				@include vendor('transition', (
+					'transform 1s ease-out',
+					'opacity 1s ease-out'
+				));
+				@include vendor('transform', 'translateY(0)');
+				opacity: 1;
 
-			&.alt {
-				opacity: 0.75;
-			}
-		}
-
-		&.style1 { &:after { background-color: _palette(accent1); } }
-		&.style2 { &:after { background-color: _palette(accent2); } }
-		&.style3 { &:after { background-color: _palette(accent3); } }
-		&.style4 { &:after { background-color: _palette(accent4); } }
-		&.style5 { &:after { background-color: _palette(accent5); } }
-		&.style6 { &:after { background-color: _palette(accent6); } }
-
-		body.is-preload & {
-			&:after {
-				opacity: 1.0;
-			}
-
-			> .inner {
-				@include vendor('filter', 'blur(0.125em)');
-				@include vendor('transform', 'translateX(-0.5em)');
-				opacity: 0;
+				border-left: solid 1px _palette(accent2, border);
+				margin: 0 0 0 _size(section-spacing);
+				min-width: 20em;
+				padding: 1em 0 1em (_size(section-spacing) * 0.75);
 			}
 		}
 
 		@include breakpoint('<=large') {
 			background-attachment: scroll;
+
+			.inner {
+				max-width: 100%;
+				padding: 0 (_size(section-spacing) * 0.75);
+			}
+		}
+
+		@include breakpoint('<=medium') {
+			.inner {
+				@include vendor('flex-direction', 'column');
+				@include vendor('align-items', 'stretch');
+				text-align: center;
+
+				.actions {
+					border-left: 0;
+					margin: (_size(section-spacing) * 0.75) 0 0 0;
+					min-width: 0;
+					padding: 0;
+				}
+			}
 		}
 
 		@include breakpoint('<=small') {
-			@include padding(3em, 0, (2em, 0, 0, 0));
+			@include padding(5.5em, 0, (2em, 0, 0, 0));
 			height: auto;
-			margin-bottom: -2.75em;
-			max-height: none;
 			min-height: 0;
-			top: -2.75em;
 
-			h1 {
-				font-size: 2em;
-			}
+			.inner {
+				padding: 0 1.5em;
 
-			> .inner {
-				.content {
-					display: block;
-
-					> * {
-						margin-right: 0;
-						margin-bottom: _size(element-margin);
-					}
+				h2 {
+					font-size: 1.75em;
 				}
-			}
 
-			&.major {
-				height: auto;
-				min-height: 0;
-				max-height: none;
+				p {
+					font-size: 1em;
+				}
+
+				.actions {
+					margin: _size(element-margin) 0 0 0;
+				}
 			}
 		}
 
 		@include breakpoint('<=xsmall') {
-			@include padding(4em, 0, (2em, 0, 0, 0));
+			min-height: 75vh;
 
-			> .inner {
+			.inner {
+				-ms-flex: 1;
+			}
+		}
+
+		body.is-preload & {
+			&:after {
+				opacity: 1;
+				visibility: visible;
+			}
+
+			.inner {
 				.content {
-					p {
-						br {
-							display: none;
-						}
-					}
+					opacity: 0;
+					@include vendor('transform', 'translateY(-1em)');
+				}
+
+				.actions {
+					opacity: 0;
+					@include vendor('transform', 'translateY(1em)');
 				}
 			}
 
-			&.major {
-				@include padding(6em, 0, (2em, 0, 0, 0));
+			@include breakpoint('<=medium') {
+				.inner {
+					.content {
+						@include vendor('transform', 'translateY(0)');
+					}
+
+					.actions {
+						@include vendor('transform', 'translateY(0)');
+					}
+				}
 			}
 		}
 	}

@@ -1,7 +1,7 @@
 ///
-/// Forty by HTML5 UP
-/// html5up.net | @ajlkn
-/// Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+/// Prototype by Pixelarity
+/// pixelarity.com | hello@pixelarity.com
+/// License: pixelarity.com/license
 ///
 
 /* Section/Article */
@@ -13,57 +13,46 @@
 	}
 
 	header {
+		p {
+			position: relative;
+			margin: 0 0 _size(element-margin) 0;
+		}
+
 		&.major {
-			width: -moz-max-content;
-			width: -webkit-max-content;
-			width: -ms-max-content;
-			width: max-content;
-			margin-bottom: _size(element-margin);
+			text-align: center;
+			margin: 0 0 (_size(element-margin) * 1.5) 0;
 
-			> :first-child {
+			> :last-child {
 				margin-bottom: 0;
-				width: calc(100% + 0.5em);
-
-				&:after {
-					content: '';
-					background-color: _palette(fg-bold);
-					display: block;
-					height: 2px;
-					margin: 0.325em 0 0.5em 0;
-					width: 100%;
-				}
 			}
+		}
 
-			> p {
-				font-size: 0.7em;
-				font-weight: _font(weight-bold);
-				letter-spacing: _font(letter-spacing-alt);
-				margin-bottom: 0;
-				text-transform: uppercase;
-			}
-
-			body.is-ie & {
-				> :first-child {
-					&:after {
-						max-width: 9em;
-					}
-				}
-
-				> h1 {
-					&:after {
-						max-width: 100% !important;
-					}
-				}
+		@include breakpoint('<=medium') {
+			br {
+				display: none;
 			}
 		}
 
 		@include breakpoint('<=small') {
 			&.major {
-				> p {
-					br {
-						display: none;
-					}
-				}
+				margin: 0 0 _size(element-margin) 0;
+			}
+		}
+	}
+
+	footer {
+		&.major {
+			text-align: center;
+			margin: (_size(element-margin) * 1.5) 0 _size(element-margin) 0;
+
+			> :last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		@include breakpoint('<=small') {
+			&.major {
+				margin: _size(element-margin) 0 _size(element-margin) 0;
 			}
 		}
 	}
