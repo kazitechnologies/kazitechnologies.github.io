@@ -36,9 +36,7 @@ const client = contentful.createClient({
     }, 100);
 
     client
-      .getEntries({
-        content_type: "website"
-      })
+      .getContentType("website")
       .then(entry => console.log(entry))
       .catch(err => console.log(err));
   });
