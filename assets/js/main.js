@@ -3,9 +3,6 @@
 	pixelarity.com | hello@pixelarity.com
 	License: pixelarity.com/license
 */
-
-const contentful = require("contentful");
-
 const SPACE_ID = "8r7g5nqpy5xa";
 const ACCESS_TOKEN =
   "6e29cb9168aa5283b341ec9e67d7ecd4b32387a20633cba4ce3f3102318a34c8";
