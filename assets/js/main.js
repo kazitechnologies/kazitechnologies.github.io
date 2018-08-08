@@ -20,6 +20,24 @@ const client = contentful.createClient({
     $header = $("#header"),
     $banner = $("#banner");
 
+  setContent = function(data) {
+    console.log(data);
+    const fields = data.items[0].fields;
+    for (var prop in fields) {
+      if (fields.hasOwnProperty(prop)) {
+        const value = fields[prop];
+        if (typeof value === "string") {
+          if (prop.endsWith("Icon")) {
+            $("#" + prop).addClass(value);
+          } else {
+            $("#" + prop).html(value);
+          }
+        } else {
+          $("#" + prop).attr("src", "http:" + value.fields.file.url);
+        }
+      }
+    }
+  };
   // Breakpoints.
   breakpoints({
     xlarge: ["1281px", "1680px"],
@@ -37,7 +55,7 @@ const client = contentful.createClient({
 
     client
       .getEntries()
-      .then(entry => console.log(entry))
+      .then(entries => setContent(entries))
       .catch(err => console.log(err));
   });
 
